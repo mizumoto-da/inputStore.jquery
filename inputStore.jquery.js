@@ -29,6 +29,8 @@
           if(settings.debug) {
             console.log("Previous Input for ["+settings.name+"] = ["+$(dom).prop('checked')+"]");
           }
+        } else if(type === "radio") {
+          inputStoreSet(settings.name, $(dom).prop('checked'), settings.expire);
         } else {
           inputStoreSet(settings.name, dom.value, settings.expire);
           if(settings.debug) {
@@ -49,7 +51,7 @@
         var previousSet = inputStoreGet(settings.name);
 
         var type = this.attr("type") || this[0].nodeName;
-        if(type && type == "checkbox" && previousSet == "true"){
+        if(type && (type == "checkbox" || type == "radio") && previousSet == "true"){
           this.prop('checked', previousSet);
         } else {
           this.val(previousSet);
